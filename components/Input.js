@@ -8,17 +8,15 @@ import {
 import React, { useState } from "react";
 
 
-export default function Input({inputHandler}) {
+export default function Input({inputHandler, title}) {
   const [text, setText] = useState("");
 
   function confirmHandler(){
-    inputhandler(text);
+    inputHandler(text);
     setText("");
   }
 
-  function resetHandler(){
-    setText("");
-  }
+
 
   function changeTextHandler(changeText){
     setText(changeText)
@@ -26,11 +24,21 @@ export default function Input({inputHandler}) {
 
   return (
     <View style={styles.inputContainer}>
-      <Text>Input</Text>
+      <Text>{title}</Text>
+      <TextInput
+          style={styles.input}
+          value={text}
+          onChangeText={changeTextHandler}
+        />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  input: {
+    borderBottomWidth: 2,
+    borderBottomColor: colors.inputboxcolor,
+    width: "50%",
+  },  
 
 })

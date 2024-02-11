@@ -1,36 +1,68 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Button, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react';
 import Input from '../components/Input';
+import CustomButton from '../components/Button';
+import colors from '../components/Color';
 
 export default function SartScreen(navigation) {
-  const[numberError, setNumberError] = useState('');
+  const firstbox = "Email Address"
+  const secondbox = "Phone Number"
+  const[NumberError, setNumberError] = useState('');
   const[EmailError, setEmailError] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
+  function validateEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
   
-  function receiveInput(data){
+  function validatePhoneNumber(number) {
+    return /^\d{10}$/.test(number);
+  }
+  
+  function handleConfirm() {
+    let isValid = true;
     setEmailError('');
     setNumberError('');
-    let hasError = false;
-
-    //validate Email()
-    if(!email || ){
+  
+    if (!validateEmail(email)) {
       setEmailError('Please enter a valid email address.');
-      hasError = true;      
+      isValid = false;
     }
-
-    //validate phonenumber(10 digits, no letters)
-    const numberVal = parseInt(Number,10);
-    if(isNaN(numberVal) ){
+    if (!validatePhoneNumber(phoneNumber)) {
       setNumberError('Please enter a valid phone number.');
-      hasError = true;
+      isValid = false;
+    }
+  
+    if (isValid) {
+      // navigation.navigate('NextScreenName');
     }
   }
-
-
+  
+  function resetHandler() {
+    setEmail('');
+    setPhoneNumber('');
+    setEmailError('');
+    setPhoneNumberError('');
+  }
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.Text}>Email Address</Text>
-      <Input inputHandler={receiveInput}/>
+
+      <Input 
+        inputHandler={setEmail}
+        title="Email Address"
+        errorMessage={EmailError}
+      />
+
+      <Input 
+        inputHandler={setPhoneNumber}
+        title="Phone Number"
+        errorMessage={NumberError}
+      />
+
+      <CustomButton title='Reset' onPress={resetHandler} disabled={false}/>
+      <CustomButton title='Start' onPress={handleConfirm} disabled={!email && !phoneNumber}/>
     </View>
   )
 }
@@ -38,17 +70,8 @@ export default function SartScreen(navigation) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor:colors.background,
     // alignItems: "center",
     justifyContent: "center",
   },
-  topView: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  scrollViewContent: {
-    alignItems: "center",
-  },
-  bottomView: { flex: 4, backgroundColor: "#dcd" },
 });
