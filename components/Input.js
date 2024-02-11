@@ -5,30 +5,20 @@ import {
   TextInput,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
+import colors from '../components/Color';
 
 
-export default function Input({inputHandler, title}) {
-  const [text, setText] = useState("");
+export default function Input({ value,inputHandler, title}) {
 
-  function confirmHandler(){
-    inputHandler(text);
-    setText("");
-  }
-
-
-
-  function changeTextHandler(changeText){
-    setText(changeText)
-  }
 
   return (
     <View style={styles.inputContainer}>
-      <Text>{title}</Text>
+      <Text style={styles.titleText}>{title}</Text>
       <TextInput
           style={styles.input}
-          value={text}
-          onChangeText={changeTextHandler}
+          value={value}
+          onChangeText={inputHandler}
         />
     </View>
   )
@@ -36,9 +26,13 @@ export default function Input({inputHandler, title}) {
 
 const styles = StyleSheet.create({
   input: {
-    borderBottomWidth: 2,
-    borderBottomColor: colors.inputboxcolor,
-    width: "50%",
+    borderWidth: 2,
+    borderColor: colors.inputbox,
+    borderRadius: 5,
+    backgroundColor: colors.inputboxcolor,
   },  
-
+  titleText: {
+    margin :5,
+    color: colors.inputbox,
+  }
 })

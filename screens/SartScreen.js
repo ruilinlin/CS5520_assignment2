@@ -4,9 +4,8 @@ import Input from '../components/Input';
 import CustomButton from '../components/Button';
 import colors from '../components/Color';
 
-export default function SartScreen(navigation) {
-  const firstbox = "Email Address"
-  const secondbox = "Phone Number"
+export default function SartScreen({navigation}) {
+
   const[NumberError, setNumberError] = useState('');
   const[EmailError, setEmailError] = useState('');
   const [email, setEmail] = useState('');
@@ -40,29 +39,35 @@ export default function SartScreen(navigation) {
   }
   
   function resetHandler() {
+    console.log('Reset button pressed');
     setEmail('');
     setPhoneNumber('');
     setEmailError('');
-    setPhoneNumberError('');
+    setNumberError('');
   }
   
   return (
     <View style={styles.container}>
-
-      <Input 
-        inputHandler={setEmail}
-        title="Email Address"
-        errorMessage={EmailError}
-      />
-
-      <Input 
-        inputHandler={setPhoneNumber}
-        title="Phone Number"
-        errorMessage={NumberError}
-      />
-
-      <CustomButton title='Reset' onPress={resetHandler} disabled={false}/>
-      <CustomButton title='Start' onPress={handleConfirm} disabled={!email && !phoneNumber}/>
+    <View style ={styles.inputContainer}>
+        <Input 
+          value={email}
+          inputHandler={setEmail}
+          title="Email Address"
+          //errorMessage={EmailError}
+        />
+          {EmailError ? <Text style={styles.errorText}>{EmailErrormailError}</Text> : null}
+        <Input 
+          value={phoneNumber}
+          inputHandler={setPhoneNumber}
+          title="Phone Number"
+          //errorMessage={NumberError}
+        />
+          {NumberError ? <Text style={styles.errorText}>{NumberError}</Text> : null}
+      </View>
+      <View style = {styles.buttonContainer}>
+        <CustomButton title='Reset' onPress={resetHandler} disabled={false}/>
+        <CustomButton title='Start' onPress={handleConfirm} disabled={!email && !phoneNumber}/>
+      </View>
     </View>
   )
 }
@@ -71,7 +76,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor:colors.background,
-    // alignItems: "center",
     justifyContent: "center",
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly', 
+  },
+  inputContainer:{
+    margin:3,
+    width: "99%",
+  },
+  errorText: {
+    color: colors.inputbox,
+    fontSize: 10,
+  }
 });
