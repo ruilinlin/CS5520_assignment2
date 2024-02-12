@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import Header from '../components/Header';
 import ActivitiesList from '../components/ActivitiesList';
 import { useRoute } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 
 export default function AllActivities({navigation, route }) {
   const [activities, setActivities] = useState([]);
-  const route = useRoute();
+  //const route = useRoute();
 
   useEffect(() => {
+    console.log(route.params); 
     if (route.params?.newActivity) {
       setActivities((currentActivities) => [...currentActivities, route.params.newActivity]);
     }
@@ -22,7 +23,7 @@ export default function AllActivities({navigation, route }) {
         data={activities}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <GoalItem goalObj={item} />
+          <ActivitiesList activity={item} />
         )}
       />
     </View>
