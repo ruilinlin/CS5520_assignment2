@@ -4,13 +4,16 @@ import Input from '../components/Input';
 import CustomButton from '../components/Button';
 import colors from '../components/Color';
 import Header from '../components/Header';
-import DropDownPicker from 'react-native-dropdown-picker';
-
+import AllActivities from "../screens/AllActivities"
+import { useNavigation } from '@react-navigation/native';
 
 export default function AddAnActivity() {
   const [activity,setacivity] = useState(null);
   const [duration,setduration] = useState("");
   const [date,setdate] = useState("");  
+
+  const { addActivity } = useActivities();
+  const navigation = useNavigation();
 
   const activityItems = [
     { label: 'Walking', value: 'walking' },
@@ -31,6 +34,13 @@ export default function AddAnActivity() {
 
   function handleSave() {
     console.log('Save Pressed', { activity, duration, date });
+    if (!activity || !duration || !date) {
+      Alert.alert('Error', 'Please fill out all fields.');
+      return;
+    }    
+    addActivity({ activity, duration, date });
+    navigation.navigate('AllActivities'); // Or use navigation.navigate('NameOfTheAllActivitiesScreen');
+  };
   }
 
   return (

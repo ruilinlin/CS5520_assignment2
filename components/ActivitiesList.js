@@ -1,17 +1,15 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function GoalItem({ goalObj, AddFunction }) {
+export default function ActivitiesList({ activityObj, AddFunction }) {
   function AddFunction() {
-    deleteFunction(goalObj.id);
+    AddFunction(activityObj);
   }
 
   return (
     <View style={styles.textContainer}>
-      <Text style={styles.text}>{goalObj.text}</Text>
 
-      <Button color="black" title="X" onPress={deleteHandler} />
-      <Button color="black" title="i" onPress={goalPressHandler} />
+      <Text style={styles.text}>{goalObj.text}</Text>
     </View>
   );
 }
@@ -32,4 +30,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-FooterNortheastern University
+
