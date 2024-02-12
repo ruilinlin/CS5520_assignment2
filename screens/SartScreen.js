@@ -34,7 +34,7 @@ export default function SartScreen({navigation}) {
     }
   
     if (isValid) {
-      // navigation.navigate('NextScreenName');
+       navigation.navigate('AddAnActivity');
     }
   }
   
@@ -55,7 +55,7 @@ export default function SartScreen({navigation}) {
           title="Email Address"
           //errorMessage={EmailError}
         />
-          {EmailError ? <Text style={styles.errorText}>{EmailErrormailError}</Text> : null}
+          {EmailError ? <Text style={styles.errorText}>{EmailError}</Text> : null}
         <Input 
           value={phoneNumber}
           inputHandler={setPhoneNumber}

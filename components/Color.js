@@ -10,6 +10,7 @@ const colors = {
   text: '#4b0082', 
   inputtext: '#4b0082', 
   error: '#ffd700',
+  dropdownbackgroundColor: "white", 
 }
 
 
