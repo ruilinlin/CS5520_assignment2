@@ -1,18 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 import Input from '../components/Input';
 import CustomButton from '../components/Button';
 import colors from '../components/Color';
 import Header from '../components/Header';
-import AllActivities from "../screens/AllActivities"
+import AllActivities from "../screens/AllActivities";
 import { useNavigation } from '@react-navigation/native';
 
 export default function AddAnActivity() {
-  const [activity,setacivity] = useState(null);
-  const [duration,setduration] = useState("");
-  const [date,setdate] = useState("");  
+  const [activity,setActivity] = useState("");
+  const [duration,setDuration] = useState("");
+  const [date,setDate] = useState("");  
 
-  const { addActivity } = useActivities();
   const navigation = useNavigation();
 
   const activityItems = [
@@ -27,9 +26,9 @@ export default function AddAnActivity() {
 
   function handleCancel() {
     console.log('Cancel Pressed');
-    setacivity("");
-    setdate("");
-    setduration("");
+    setActivity("");
+    setDate("");
+    setDuration("");
   }
 
   function handleSave() {
@@ -38,10 +37,9 @@ export default function AddAnActivity() {
       Alert.alert('Error', 'Please fill out all fields.');
       return;
     }    
-    addActivity({ activity, duration, date });
-    navigation.navigate('AllActivities'); // Or use navigation.navigate('NameOfTheAllActivitiesScreen');
-  };
+    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
   }
+  
 
   return (
     <View style={styles.container}>
@@ -49,7 +47,7 @@ export default function AddAnActivity() {
     <View style ={styles.inputContainer}>
         <Input 
           value={activity}
-          inputHandler={setacivity}
+          inputHandler={setActivity}
           title="Activity *"
           items={activityItems}
 
@@ -57,13 +55,13 @@ export default function AddAnActivity() {
 
         <Input 
           value={duration}
-          inputHandler={setduration}
+          inputHandler={setDuration}
           title="Duration {min} *"
         />
 
         <Input 
           value={date}
-          inputHandler={setdate}
+          inputHandler={setDate}
           title="Date *"
           isDateInput={true} 
         />
@@ -74,8 +72,8 @@ export default function AddAnActivity() {
         <CustomButton title='Save' onPress={handleSave} disabled={false}/>
       </View>
     </View>
-  )
-}
+  );
+  }
 
 
 const styles = StyleSheet.create({
