@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert} from 'react-native';
 import React, { useState } from 'react';
 import Input from '../components/Input';
 import CustomButton from '../components/Button';
@@ -29,6 +29,7 @@ export default function AddAnActivity() {
     setActivity("");
     setDate("");
     setDuration("");
+    navigation.goBack();
   }
 
   function handleSave() {
@@ -43,7 +44,9 @@ export default function AddAnActivity() {
 
   return (
     <View style={styles.container}>
-      <Header title={"Add An Activity"}/>
+      <View style={styles.HeaderContainer}>
+        <Header title={"Add An Activity"}/>
+      </View>
         <View style ={styles.inputContainer}>
         <Input 
           value={activity}
@@ -80,15 +83,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor:colors.background,
-//    justifyContent: "center",
+    alignItems: "center",
+//    justifyContent: "center", 
+  },
+  HeaderContainer:{
+    flex: 1,
   },
   buttonContainer: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly', 
+
   },
   inputContainer:{
-    margin:3,
-    width: "99%",
+    flex: 4,
+   margintop:70,
+    width: "90%",
   },
   errorText: {
     color: colors.inputbox,

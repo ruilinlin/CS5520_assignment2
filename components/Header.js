@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonContainer:{
-    paddingHorizontal: 20, 
+    paddingHorizontal: 5, 
   },
   headerText: {
     color: colors.title,
