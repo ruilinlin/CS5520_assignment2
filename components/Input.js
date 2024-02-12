@@ -28,9 +28,8 @@ const Input = ({ title, inputHandler, value, items = null, isDateInput = false }
         <>
           <TextInput
             style={styles.input}
-            value={date.toLocaleDateString()}
+//            value={date.toLocaleDateString()}
             onFocus={() => setShowDatePicker(true)}
-            placeholder={title}
           />
           {showDatePicker && (
             <DateTimePicker
@@ -63,7 +62,6 @@ const Input = ({ title, inputHandler, value, items = null, isDateInput = false }
           style={styles.input}
           onChangeText={(text) => inputHandler(text)}
           value={typeof value === 'string' ? value : selectedItem}
-          placeholder={title}
         />
       )}
     </View>

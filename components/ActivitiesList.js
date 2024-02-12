@@ -36,15 +36,18 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   innerBox: {
-    padding: 10,
-    margin: 10,
+    padding: 8,
+    marginRight: 10,
+    marginleft:4,
     backgroundColor: colors.dropdownbackgroundColor, 
     elevation: 5, // Elevation for Android  
   },
   infoText:{
     color: colors.dropdownbackgroundColor,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop:10,
+    marginRight:6,
+    fontWeight: 10,
+
   }
 });
 

@@ -34,7 +34,7 @@ export default function SartScreen({navigation}) {
     }
   
     if (isValid) {
-       navigation.navigate('AddAnActivity');
+       navigation.navigate('AllActivities');
     }
   }
   

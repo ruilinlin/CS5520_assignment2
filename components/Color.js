@@ -11,7 +11,7 @@ const colors = {
   inputtext: '#4b0082', 
   error: '#ffd700',
   dropdownbackgroundColor: "white", 
-  yellowButton:"yellow",
+  yellowButton:"gold",
 }
 
 

@@ -21,7 +21,7 @@ export default function App() {
         <Stack.Screen
           name="AllActivities"
           component={AllActivities}
-          options={{ headerShown: false }} 
+         options={{ headerShown: false }} 
         />
         <Stack.Screen
  //        options={{ newActivity}}

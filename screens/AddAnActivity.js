@@ -44,7 +44,7 @@ export default function AddAnActivity() {
   return (
     <View style={styles.container}>
       <Header title={"Add An Activity"}/>
-    <View style ={styles.inputContainer}>
+        <View style ={styles.inputContainer}>
         <Input 
           value={activity}
           inputHandler={setActivity}
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor:colors.background,
-    justifyContent: "center",
+//    justifyContent: "center",
   },
   buttonContainer: {
     flexDirection: 'row',

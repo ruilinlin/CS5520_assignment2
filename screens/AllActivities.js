@@ -4,6 +4,7 @@ import ActivitiesList from '../components/ActivitiesList';
 import { useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import colors from '../components/Color';
+import BottomTab from '../components/BottomTab';
 
 export default function AllActivities({navigation, route }) {
   const [activities, setActivities] = useState([]);
@@ -16,29 +17,18 @@ export default function AllActivities({navigation, route }) {
     }
   }, [route.params?.newActivity]);
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Button 
-          title="Add" 
-          color={colors.yellowButton} 
-          onPress={() => navigation.navigate('AddAnActivity')} 
-        />
-      ),
-    });
-  }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <Header title={'All Activities'}/>
-      <FlatList
+      <Header title={'All Activities'} navigation={navigation} showAddButton={true}/>
+      <FlatList style={styles.listContainer}
         data={activities}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <ActivitiesList activity={item} />
         )}
- style={{ marginTop: 60 }} 
       />
+      <BottomTab navigation={navigation}/>
     </View>
   );
 }
@@ -49,4 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor:colors.background,
     justifyContent: "center",
   },
+  listContainer:{
+    marginTop:30,
+    marginBottom:30,
+  }
 })
