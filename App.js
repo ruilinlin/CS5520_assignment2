@@ -16,15 +16,18 @@ export default function App() {
         <Stack.Screen
           name="StartScreen"
           component={SartScreen}
+          options={{ headerShown: false }} 
         />
         <Stack.Screen
           name="AllActivities"
           component={AllActivities}
+          options={{ headerShown: false }} 
         />
         <Stack.Screen
- //         options={{ newActivity}}
+ //        options={{ newActivity}}
           name="AddAnActivity"
           component={AddAnActivity}
+          options={{ headerShown: false }} 
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList,Button,SafeAreaView } from 'react-native'
 import Header from '../components/Header';
 import ActivitiesList from '../components/ActivitiesList';
 import { useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
+import colors from '../components/Color';
 
 export default function AllActivities({navigation, route }) {
   const [activities, setActivities] = useState([]);
@@ -15,9 +16,20 @@ export default function AllActivities({navigation, route }) {
     }
   }, [route.params?.newActivity]);
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button 
+          title="Add" 
+          color={colors.yellowButton} 
+          onPress={() => navigation.navigate('AddAnActivity')} 
+        />
+      ),
+    });
+  }, [navigation]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Header title={'All Activities'}/>
       <FlatList
         data={activities}
@@ -25,9 +37,16 @@ export default function AllActivities({navigation, route }) {
         renderItem={({ item }) => (
           <ActivitiesList activity={item} />
         )}
+ style={{ marginTop: 60 }} 
       />
     </View>
   );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor:colors.background,
+    justifyContent: "center",
+  },
+})

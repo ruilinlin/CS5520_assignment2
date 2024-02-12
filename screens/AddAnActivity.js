@@ -15,13 +15,13 @@ export default function AddAnActivity() {
   const navigation = useNavigation();
 
   const activityItems = [
-    { label: 'Walking', value: 'walking' },
-    { label: 'Running', value: 'running' },
-    { label: 'Swimming', value: 'swimming' },
-    { label: 'Weights', value: 'weights' },
-    { label: 'Yoga', value: 'yoga' },
-    { label: 'Cycling', value: 'cycling' },
-    { label: 'Hiking', value: 'hiking' },
+    { label: 'Walking', value: 'Walking' },
+    { label: 'Running', value: 'Running' },
+    { label: 'Swimming', value: 'Swimming' },
+    { label: 'Weights', value: 'Weights' },
+    { label: 'Yoga', value: 'Yoga' },
+    { label: 'Cycling', value: 'Cycling' },
+    { label: 'Hiking', value: 'Hiking' },
   ];
 
   function handleCancel() {

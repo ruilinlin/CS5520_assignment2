@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,SafeAreaView } from 'react-native'
 import React from 'react'
 import colors from './Color';
 
 export default function Header({ title}) {
   return (
-    <View style={styles.headerContainer}>
+    <SafeAreaView style={styles.headerContainer}>
       <Text style ={styles.headerText}>{title}</Text>
-    </View>
+      </SafeAreaView>
   )
 }
 
