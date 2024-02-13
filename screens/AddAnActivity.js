@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import AllActivities from "../screens/AllActivities";
 import { useNavigation } from '@react-navigation/native';
 
+
 export default function AddAnActivity() {
   const [activity,setActivity] = useState("");
   const [duration,setDuration] = useState("");
@@ -32,12 +33,18 @@ export default function AddAnActivity() {
     navigation.goBack();
   }
 
-  function handleSave() {
+  function handleSave(duration) {
     console.log('Save Pressed', { activity, duration, date });
     if (!activity || !duration || !date) {
       Alert.alert('Error', 'Please fill out all fields.');
       return;
     }    
+    const durationNumber = Number(duration);
+    if (isNaN(durationNumber) || durationNumber <= 0) {
+      alert('Please enter a valid duration number.');
+      return;
+    }
+
     navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
   }
   
@@ -71,8 +78,8 @@ export default function AddAnActivity() {
 
       </View>
       <View style = {styles.buttonContainer}>
-        <CustomButton title='Cancle' onPress={handleCancel} disabled={false}/>
-        <CustomButton title='Save' onPress={handleSave} disabled={false}/>
+        <CustomButton title='Cancel' onPress={handleCancel} disabled={false}/>
+        <CustomButton title='Save' onPress={() => handleSave(duration)} disabled={false}/>
       </View>
     </View>
   );

@@ -11,10 +11,11 @@ export default function SpecialActivites({navigation, route }) {
   useEffect(() => {
     if (route.params?.activities) {
       const specialActivities = route.params.activities.filter(activity => 
-        Number(activity.duration) >= 60
+        (activity.activity === "Running" || activity.activity=== "Weights") &&  
+        Number(activity.duration) > 60
       );
   
-      console.log(specialActivities); // Log to debug
+      console.log(specialActivities); 
       setActivities(specialActivities);
     }
   }, [route.params?.activities]);
@@ -24,7 +25,7 @@ export default function SpecialActivites({navigation, route }) {
   return (
     <View style={styles.container}>
       <Header title={'Special Activities'} navigation={navigation} showAddButton={true}/>
-      <FlatList
+      <FlatList style={styles.listContainer}
         data={activities}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
@@ -42,4 +43,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     justifyContent: "center",
   },
+  listContainer:{
+    marginTop:30,
+    marginBottom:30,
+  }
 })

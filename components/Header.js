@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     color: colors.yellowButton,
-    fontSize: 20,
+    fontSize: 16,
   },
 });

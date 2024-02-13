@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import colors from '../components/Color';
 import BottomTab from '../components/BottomTab';
 
+
 export default function AllActivities({navigation, route }) {
   const [activities, setActivities] = useState([]);
 
@@ -40,8 +41,6 @@ export default function AllActivities({navigation, route }) {
         )}
       />
 <BottomTab navigation={navigation} activePage="AllActivities" activities={activities} />
-
-
     </View>
   );
 }
