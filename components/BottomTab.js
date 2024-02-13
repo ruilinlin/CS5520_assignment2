@@ -5,29 +5,30 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function BottomTab({ navigation, activePage, activities}) {
-  const getIconColor = (page) => activePage === page ? colors.bottomtextinuse : colors.bottomtext;
-
+  const getTextAndIconColor = (page) => activePage === page ? colors.bottomtextinuse : colors.bottomtext;
+  console.log(activePage); 
   return (
     <View style={styles.tabContainer}>
     <View style={styles.iconContainer}>
-      <MaterialIcons name="attach-money" size={24} color={getIconColor('AllActivities')} />
+      <MaterialIcons name="attach-money" size={24} color={getTextAndIconColor('AllActivities')} />
       <TouchableOpacity
         style={[styles.button, activePage === 'AllActivities' && styles.activeTab]}
         onPress={() => navigation.navigate('AllActivities')}
       >
-        <Text style={[styles.buttonText, activePage === 'AllActivities' && styles.activeText]}>
+        <Text style={{ color: getTextAndIconColor('AllActivities') }}>
           All Activities
         </Text>
+        
       </TouchableOpacity>
     </View>
 
     <View style={styles.iconContainer}>
-      <AntDesign name="exclamation" size={24} color={getIconColor('AllActivities')} />
+      <AntDesign name="exclamation" size={24} color={getTextAndIconColor('SpecialActivities')} />
       <TouchableOpacity
         style={[styles.button, activePage === 'SpecialActivities' && styles.activeTab]}
         onPress={() => navigation.navigate('SpecialActivities', { activities })}
       >
-        <Text style={[styles.buttonText, activePage === 'SpecialActivities' && styles.activeText]}>
+        <Text style={{ color: getTextAndIconColor('SpecialActivities') }}>
           Special Activities
         </Text>
       </TouchableOpacity>

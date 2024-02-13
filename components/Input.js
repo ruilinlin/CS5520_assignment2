@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import DropDownPicker from 'react-native-dropdown-picker';
+//import DropDownPicker from 'react-native-dropdown-picker';
+import { SelectList } from 'react-native-dropdown-select-list';
+
 import colors from '../components/Color';
 
 const Input = ({ title, inputHandler, value, items = null,isDateInput = false }) => {
@@ -9,8 +11,9 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
   const [date, setDate] = useState(value ? new Date(value) : new Date());
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(value);
+  const selectListItems = items?.map(item => ({ key: item.value, value: item.label }));
 
-  const dynamicDropdownStyle = open ? { zIndex: 3000 } : { zIndex: 1 };
+//  const dynamicDropdownStyle = open ? { zIndex: 3000 } : { zIndex: 1 };
 
   const showDatepicker = () => {
     setShowDatePicker(true);
@@ -20,11 +23,11 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
     const currentDate = selectedDate || date;
     setShowDatePicker(Platform.OS === 'ios' ? true : false); // On Android, the picker will close automatically
     setDate(currentDate);
-    inputHandler(currentDate.toDateString()); // Pass the selected date in YYYY-MM-DD format
+    inputHandler(currentDate.toDateString());
   };
 
   return (
-  <View style={[styles.inputContainer, dynamicDropdownStyle]}>
+  <View style={styles.inputContainer}>
       <Text style={styles.titleText}>{title}</Text>
       {isDateInput ? (
         <>
@@ -47,20 +50,15 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
           )}
         </>
       ) : items ? (
-        <DropDownPicker
-          open={open}
-          value={selectedItem}
-          items={items}
-          setOpen={setOpen}
-          setValue={setSelectedItem}
-          onChangeValue={(value) => {
-          inputHandler(value);
-          setSelectedItem(value);
-          }}
-          containerStyle={styles.dropdownContainer}
-          style={styles.dropdown}
-          dropDownStyle={dynamicDropdownStyle}
-          zIndexInverse={1000}
+        <SelectList 
+          setSelected={setSelectedItem} 
+          data={items} 
+          onSelect={() => inputHandler(selectedItem)}
+          boxStyles={styles.input} 
+ //         inputStyles={styles.input} 
+          dropdownStyles={styles.dropdown} 
+          dropdownItemStyles={styles.dropdownItem} 
+          dropdownTextStyles={styles.dropdownText} 
         />
       ): (
         <TextInput
@@ -88,15 +86,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: colors.inputboxcolor,
     padding: 10,
+    minHeight: 40,
   },
   dateText:{
     color: colors.text,
   },
   dropdownContainer: {
-    width: '100%',
+    marginTop: 5,
+    marginBottom: 15,
+    zIndex: 1000, 
   },
   dropdown: {
-    backgroundColor: colors.inputboxcolor,
+    backgroundColor: colors.dropdownbackgroundColor,
   },
   dropdownItem: {
     justifyContent: 'flex-start',
@@ -104,6 +105,9 @@ const styles = StyleSheet.create({
   datePicker:{
     backgroundColor:colors.background,
   },
+  dropdownText:{
+
+  }
 });
 
 export default Input;

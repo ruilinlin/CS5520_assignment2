@@ -52,7 +52,7 @@ export default function AddAnActivity() {
   return (
     <View style={styles.container}>
       <View style={styles.HeaderContainer}>
-        <Header title={"Add An Activity"}/>
+        <Header title={"Add An Activity"} navigation={navigation} showBackButton={true} />
       </View>
         <View style ={styles.inputContainer}>
         <Input 
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     flexDirection: 'row',
-
+    justifyContent: 'space-evenly', 
   },
   inputContainer:{
     flex: 4,

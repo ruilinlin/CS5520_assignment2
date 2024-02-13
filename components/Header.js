@@ -1,30 +1,37 @@
 import { StyleSheet, Text, View,SafeAreaView ,TouchableOpacity} from 'react-native'
 import React from 'react'
 import colors from './Color';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Header({ title, navigation, showAddButton }) {
+export default function Header({ title, navigation, showAddButton, showBackButton }) {
   return (
     <SafeAreaView style={styles.headerContainer}>
+      {/* Render Back Button or Placeholder on the left */}
+      {showBackButton ? (
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconContainer}>
+          <MaterialIcons name="keyboard-arrow-left" size={30} color="white" />
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.placeholder} /> // Empty placeholder to keep the title centered when no back button
+      )}
 
-      <View style={showAddButton ? styles.buttonPlaceholder : styles.buttonContainer} />
-
+      {/* Title */}
       <Text style={styles.headerText}>{title}</Text>
 
-
+      {/* Render Add Button or Placeholder on the right */}
       {showAddButton ? (
         <TouchableOpacity 
-          style={styles.buttonContainer}
           onPress={() => navigation.navigate('AddAnActivity')}
-        >
+          style={styles.iconContainer}>
           <Text style={styles.addButtonText}>Add</Text>
         </TouchableOpacity>
       ) : (
-        // Empty View to balance the layout when there is no button
-        <View style={styles.buttonContainer} />
+        <View style={styles.placeholder} /> 
       )}
     </SafeAreaView>
   );
 };
+
 
 
 
@@ -40,6 +47,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     paddingHorizontal: 5, 
+    marginRight:5,
   },
   headerText: {
     color: colors.title,
@@ -50,5 +58,9 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: colors.yellowButton,
     fontSize: 16,
+
+  },
+  placeholder: {
+    width: 24, 
   },
 });
