@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor:colors.background,
   },
   dropdownText:{
-
+    color:colors.text,
   }
 });
 
