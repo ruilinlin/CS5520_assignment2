@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
   },
 
   firstinnerBox: {
-    justifyContent:'center',
-    padding: 5,
+    justifyContent:'center',    
+//    padding: 5,
     flex:2,
     backgroundColor: colors.dropdownbackgroundColor, 
     marginRight:20,
-    elevation: 5, // Elevation for Android  
+//    elevation: 5, // Elevation for Android  
   },
 
   secondinnerBox:{
