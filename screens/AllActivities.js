@@ -8,15 +8,26 @@ import BottomTab from '../components/BottomTab';
 
 export default function AllActivities({navigation, route }) {
   const [activities, setActivities] = useState([]);
-  //const route = useRoute();
 
   useEffect(() => {
-    console.log(route.params); 
     if (route.params?.newActivity) {
-      setActivities((currentActivities) => [...currentActivities, route.params.newActivity]);
+      setActivities((currentActivities) => {
+        // Check if the new activity already exists based on multiple attributes
+        const doesExist = currentActivities.some(activity =>
+          activity.date === route.params.newActivity.date &&
+          activity.duration === route.params.newActivity.duration &&
+          activity.activity === route.params.newActivity.activity
+        );
+  
+        // If it does not exist, add it to the list
+        if (!doesExist) {
+          return [...currentActivities, route.params.newActivity];
+        }
+        return currentActivities;
+      });
     }
   }, [route.params?.newActivity]);
-
+  
 
   return (
     <View style={styles.container}>
@@ -28,7 +39,9 @@ export default function AllActivities({navigation, route }) {
           <ActivitiesList activity={item} />
         )}
       />
-      <BottomTab navigation={navigation}/>
+<BottomTab navigation={navigation} activePage="AllActivities" activities={activities} />
+
+
     </View>
   );
 }

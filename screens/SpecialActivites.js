@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View ,SafeAreaView,FlatList} from 'react-native'
 import React, { useState, useEffect } from 'react';
 import ActivitiesList from '../components/ActivitiesList';
 import colors from '../components/Color';
 import Header from '../components/Header';
+import BottomTab from '../components/BottomTab';
 
 export default function SpecialActivites({navigation, route }) {
   const [activities, setActivities] = useState([]);
@@ -10,26 +11,28 @@ export default function SpecialActivites({navigation, route }) {
   useEffect(() => {
     if (route.params?.activities) {
       const specialActivities = route.params.activities.filter(activity => 
-        activity.duration > 60
+        Number(activity.duration) >= 60
       );
   
+      console.log(specialActivities); // Log to debug
       setActivities(specialActivities);
     }
-  }, [route.params?.activities]); // Dependency array to re-run effect if activities change
+  }, [route.params?.activities]);
+  
   
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header title={'Special Activities'}/>
+    <View style={styles.container}>
+      <Header title={'Special Activities'} navigation={navigation} showAddButton={true}/>
       <FlatList
         data={activities}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <ActivitiesList activity={item} />
         )}
-        style={{ marginTop: 20 }}
       />
-    </SafeAreaView>
+      <BottomTab navigation={navigation} activePage="SpecialActivities" />
+    </View>
   );
 }
 

@@ -5,13 +5,13 @@ import colors from "./Color";
 const ActivitiesList= ({ activity }) => {
   return (
     <View style={styles.outerBox}>
-
+      <View style={styles.textbox}>
         <Text style={styles.infoText}>{activity.activity}</Text>
-
-        <View style={styles.innerBox}>
+      </View>
+        <View style={styles.firstinnerBox}>
         <Text style={styles.text}>Date: {activity.date}</Text>
         </View>
-        <View style={styles.innerBox}>
+        <View style={styles.secondinnerBox}>
         <Text style={styles.text}> {activity.duration} min</Text>
       </View>
     </View>
@@ -27,26 +27,37 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
   },
-
   outerBox: {
+    flex:1,
     flexDirection: 'row',
     padding: 10,
     backgroundColor: colors.header, 
     borderRadius: 10,
     margin: 10,
   },
-  innerBox: {
+
+  textbox:{
+    flex:3,
+  },
+
+  firstinnerBox: {
     padding: 8,
-    marginRight: 10,
-    marginleft:4,
+    flex:2,
     backgroundColor: colors.dropdownbackgroundColor, 
     elevation: 5, // Elevation for Android  
   },
+
+  secondinnerBox:{
+    padding: 8,
+    flex:2,
+    backgroundColor: colors.dropdownbackgroundColor, 
+    elevation: 5, // Elevation for Android  
+  },
+  
   infoText:{
     color: colors.dropdownbackgroundColor,
     paddingTop:10,
-    marginRight:6,
-    fontWeight: 10,
+    fontWeight: "bold",
 
   }
 });

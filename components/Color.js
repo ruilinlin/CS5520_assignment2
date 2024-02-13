@@ -12,6 +12,8 @@ const colors = {
   error: '#ffd700',
   dropdownbackgroundColor: "white", 
   yellowButton:"gold",
+  bottomtext:'white',
+  bottomtextinuse:'gold',
 }
 
 

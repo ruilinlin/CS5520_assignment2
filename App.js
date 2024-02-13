@@ -3,6 +3,7 @@ import React from "react";
 import SartScreen from "./screens/SartScreen";
 import AllActivities from "./screens/AllActivities";
 import AddAnActivity from "./screens/AddAnActivity";
+import SpecialActivites from "./screens/SpecialActivites";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -29,6 +30,12 @@ export default function App() {
           component={AddAnActivity}
           options={{ headerShown: false }} 
         />
+         <Stack.Screen 
+         name="SpecialActivities" 
+         component={SpecialActivites}
+         options={{ headerShown: false }}  
+         />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

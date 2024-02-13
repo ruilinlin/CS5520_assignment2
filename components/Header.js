@@ -5,12 +5,12 @@ import colors from './Color';
 export default function Header({ title, navigation, showAddButton }) {
   return (
     <SafeAreaView style={styles.headerContainer}>
-      {/* Placeholder View to take up space and maintain balance */}
+
       <View style={showAddButton ? styles.buttonPlaceholder : styles.buttonContainer} />
 
       <Text style={styles.headerText}>{title}</Text>
 
-      {/* Conditionally render the 'Add' button if showAddButton is true */}
+
       {showAddButton ? (
         <TouchableOpacity 
           style={styles.buttonContainer}
