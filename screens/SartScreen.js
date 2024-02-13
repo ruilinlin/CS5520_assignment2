@@ -19,7 +19,7 @@ export default function SartScreen({navigation}) {
     return /^\d{10}$/.test(number);
   }
   
-  function handleConfirm() {
+  function Starthandler() {
     let isValid = true;
     setEmailError('');
     setNumberError('');
@@ -34,7 +34,9 @@ export default function SartScreen({navigation}) {
     }
   
     if (isValid) {
-       navigation.navigate('AllActivities');
+      navigation.navigate('Home', {
+        screen: 'AllActivities',
+      });
     }
   }
   
@@ -66,7 +68,7 @@ export default function SartScreen({navigation}) {
       </View>
       <View style = {styles.buttonContainer}>
         <CustomButton title='Reset' onPress={resetHandler} disabled={false}/>
-        <CustomButton title='Start' onPress={handleConfirm} disabled={!email && !phoneNumber}/>
+        <CustomButton title='Start' onPress={Starthandler} disabled={!email && !phoneNumber}/>
       </View>
     </View>
   )

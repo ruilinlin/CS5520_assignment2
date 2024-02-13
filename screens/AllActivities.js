@@ -5,10 +5,11 @@ import { useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import colors from '../components/Color';
 import BottomTab from '../components/BottomTab';
-
+import {useActivities} from '../components/ActivitiesContext';
 
 export default function AllActivities({navigation, route }) {
-  const [activities, setActivities] = useState([]);
+//  const [activities, setActivities] = useState([]);
+  const { activities, setActivities } = useActivities();
 
   useEffect(() => {
     if (route.params?.newActivity) {
@@ -40,7 +41,6 @@ export default function AllActivities({navigation, route }) {
           <ActivitiesList activity={item} />
         )}
       />
-<BottomTab navigation={navigation} activePage="AllActivities" activities={activities} />
     </View>
   );
 }
