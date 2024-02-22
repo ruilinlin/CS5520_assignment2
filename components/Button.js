@@ -1,19 +1,23 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 import colors from '../components/Color';
 
-const CustomButton = ({ title, onPress, disabled, style }) => {
+const CustomButton = ({ title,onPress, disabled, style}) => {
   const textStyle = disabled ? styles.textDisabled : styles.text;
-  const buttonContainer = styles.buttonContainer;
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={[buttonContainer , style]} // Combine button style with custom style
+      style={({pressed}) => [
+        styles.buttonContainer,
+        style,
+        pressed && style.pressed,
+        disabled && style.disabled,
+      ]}
     >
       <Text style={textStyle}>{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
