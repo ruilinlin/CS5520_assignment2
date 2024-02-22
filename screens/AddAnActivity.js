@@ -6,7 +6,7 @@ import colors from '../components/Color';
 import Header from '../components/Header';
 import AllActivities from "../screens/AllActivities";
 import { useNavigation } from '@react-navigation/native';
-
+import {database} from '../firebase_files/firebaseSetup';
 
 export default function AddAnActivity() {
   const [activity,setActivity] = useState("");
