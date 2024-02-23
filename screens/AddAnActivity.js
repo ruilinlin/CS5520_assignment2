@@ -33,7 +33,7 @@ export default function AddAnActivity() {
     navigation.goBack();
   }
 
-  function handleSave(duration) {
+  async function handleSave(duration) {
     console.log('Save Pressed', { activity, duration, date });
     if (!activity || !duration || !date) {
       Alert.alert('Error', 'Please fill out all fields.');
