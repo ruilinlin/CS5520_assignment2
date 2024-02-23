@@ -6,7 +6,7 @@ import colors from '../components/Color';
 import Header from '../components/Header';
 import AllActivities from "../screens/AllActivities";
 import { useNavigation } from '@react-navigation/native';
-import {database} from '../firebase_files/firebaseSetup';
+import { addActivity } from './FirestoreService';
 
 export default function AddAnActivity() {
   const [activity,setActivity] = useState("");
@@ -52,6 +52,19 @@ export default function AddAnActivity() {
       duration: durationNumber,
       date,
     };
+    try {
+      const docId =  addActivity(newActivityData);
+      console.log("Activity saved with ID:", docId);
+
+      // Reset form or navigate  after successful save
+      setActivity("");
+      setDuration("");
+      setDate("");
+      navigation.goBack();
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  }    
 }
   
 
@@ -89,7 +102,7 @@ export default function AddAnActivity() {
       </View>
     </View>
   );
-  }
+  
 
 
 const styles = StyleSheet.create({

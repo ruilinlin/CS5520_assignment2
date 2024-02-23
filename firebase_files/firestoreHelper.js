@@ -1,7 +1,7 @@
 import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
-export async function writeToDB(data) {
+export async function addActivity(data) {
   try {
     const docRef = await addDoc(collection(database, "activities"), data);
     console.log("New activity added with ID: ", docRef.id);
@@ -11,7 +11,7 @@ export async function writeToDB(data) {
   }
 }
 
-export async function deleteFromDB(id) {
+export async function deleteActivity(id) {
   try {
     await deleteDoc(doc(database, "activities", id));
     console.log("Activity deleted with ID: ", id);
