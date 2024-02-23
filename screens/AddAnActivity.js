@@ -45,8 +45,14 @@ export default function AddAnActivity() {
       return;
     }
 
-    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
-  }
+//    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
+  
+    const newActivityData = {
+      activity,
+      duration: durationNumber,
+      date,
+    };
+}
   
 
   return (

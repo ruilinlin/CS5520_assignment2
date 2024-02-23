@@ -2,6 +2,7 @@ import { StyleSheet, Text, View,SafeAreaView ,TouchableOpacity} from 'react-nati
 import React from 'react'
 import colors from './Color';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Header({ title, navigation, showAddButton, showBackButton }) {
   return (
@@ -23,7 +24,7 @@ export default function Header({ title, navigation, showAddButton, showBackButto
         <TouchableOpacity 
           onPress={() => navigation.navigate('AddAnActivity')}
           style={styles.iconContainer}>
-          <Text style={styles.addButtonText}>Add</Text>
+          <Ionicons name="add" size={24} color="white" />
         </TouchableOpacity>
       ) : (
         <View style={styles.placeholder} /> 
