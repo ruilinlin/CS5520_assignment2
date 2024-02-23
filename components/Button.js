@@ -9,11 +9,11 @@ const CustomButton = ({ title,onPress, disabled, style}) => {
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={({pressed}) => [
+      style={({ pressed}) => [
         styles.buttonContainer,
         style,
         pressed && style.pressed,
-        disabled && style.disabled,
+//        disabled && style.disabled,
       ]}
     >
       <Text style={textStyle}>{title}</Text>
