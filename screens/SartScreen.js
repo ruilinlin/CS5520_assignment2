@@ -68,7 +68,7 @@ export default function SartScreen({navigation}) {
       </View>
       <View style = {styles.buttonContainer}>
         <CustomButton title='Reset' onPress={resetHandler} disabled={false}/>
-        <CustomButton title='Start' onPress={Starthandler} disabled={!email && !phoneNumber}/>
+        <CustomButton title='Start' onPress={Starthandler} disabled={!email && !phoneNumber} style={{textDisabled: styles.errorText}}/>
       </View>
     </View>
   )
