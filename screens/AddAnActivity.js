@@ -6,7 +6,7 @@ import colors from '../components/Color';
 import Header from '../components/Header';
 import AllActivities from "../screens/AllActivities";
 import { useNavigation } from '@react-navigation/native';
-import { addActivity } from './FirestoreService';
+import { addActivity } from '../firebase_files/firestoreHelper';
 
 export default function AddAnActivity() {
   const [activity,setActivity] = useState("");
@@ -65,7 +65,7 @@ export default function AddAnActivity() {
       Alert.alert('Error', error.message);
     }
   }    
-}
+
   
 
   return (
@@ -102,7 +102,7 @@ export default function AddAnActivity() {
       </View>
     </View>
   );
-  
+  }  
 
 
 const styles = StyleSheet.create({
