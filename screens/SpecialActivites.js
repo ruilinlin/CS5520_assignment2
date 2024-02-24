@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View ,SafeAreaView,FlatList} from 'react-native'
 import React, { useState, useEffect } from 'react';
-import ActivitiesList from '../components/ActivitiesList';
+import ActivitiesItem from '../components/ActivitiesItem.js';
 import colors from '../components/Color';
 import Header from '../components/Header';
-import {useActivities} from '../components/ActivitiesContext';
+import ActivityList from '../components/ActivityList';
 
-export default function SpecialActivites({navigation, route }) {
+export default function SpecialActivites({navigation}) {
 //  const [activities, setActivities] = useState([]);
-  const { activities } = useActivities();
+  const  activities  = ActivityList();
 
   const specialActivities = activities.filter(activity => 
     (activity.activity === "Running" || activity.activity === "Weights") &&  
@@ -22,7 +22,7 @@ export default function SpecialActivites({navigation, route }) {
         data={specialActivities}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <ActivitiesList activity={item} />
+          <ActivitiesItem activity={item} />
         )}
       />
     </View>

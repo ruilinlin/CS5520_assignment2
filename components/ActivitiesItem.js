@@ -1,13 +1,21 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import colors from "./Color";
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
-const ActivitiesList= ({ activity }) => {
+const ActivitiesItem= ({ activity }) => {
 
   const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60;
+  const navigation = useNavigation();
+  const handlePress=() => {
+    navigation.navigate('EditActivity', { activityId: activity.id });
+  }
+  
+  
   return (
+    <TouchableOpacity onPress={handlePress}>
     <View style={styles.outerBox}>
       <View style={styles.textbox}>
         <Text style={styles.infoText}>{activity.activity}</Text>
@@ -22,6 +30,7 @@ const ActivitiesList= ({ activity }) => {
         <Text style={styles.text}> {activity.duration} min</Text>
       </View>
     </View>
+    </TouchableOpacity>
   );
 };
 
@@ -82,5 +91,5 @@ const styles = StyleSheet.create({
 });
 
 
-export default ActivitiesList
+export default ActivitiesItem
 

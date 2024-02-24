@@ -8,6 +8,7 @@ import AllActivities from "../screens/AllActivities";
 import { useNavigation } from '@react-navigation/native';
 import { addActivity } from '../firebase_files/firestoreHelper';
 
+
 export default function AddAnActivity() {
   const [activity,setActivity] = useState("");
   const [duration,setDuration] = useState("");
@@ -53,7 +54,7 @@ export default function AddAnActivity() {
       date,
     };
     try {
-      const docId =  addActivity(newActivityData);
+      const docId = addActivity(newActivityData);
       console.log("Activity saved with ID:", docId);
 
       // Reset form or navigate  after successful save
