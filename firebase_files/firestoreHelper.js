@@ -19,3 +19,22 @@ export async function deleteActivity(id) {
     console.log(err);
   }
 }
+
+export async function fetchActivitybyID(id) {
+  try {
+    const docRef = doc(database, "activities", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const activity = { id: docSnap.id, ...docSnap.data() };
+      return activity;
+      console.log(activity);
+    } else {
+      console.log("No such document!");
+    }
+  } catch (error) {
+    console.error("Error fetching activity data: ", error);
+  } finally {
+    setLoading(false);
+  }
+}
