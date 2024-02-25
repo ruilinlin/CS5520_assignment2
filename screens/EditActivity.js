@@ -1,10 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,Alert } from 'react-native'
 import React,{ useEffect, useState }  from 'react'
+import { getDoc, doc } from 'firebase/firestore';
 import { fetchActivitybyID } from '../firebase_files/firestoreHelper';
 import { useNavigation } from '@react-navigation/native';
+import colors from '../components/Color';
+import { useRoute } from '@react-navigation/native';
+import Header from '../components/Header';
+import Input from '../components/Input';
+import CustomButton from '../components/Button';
+import updatedActivities from "../firebase_files/firestoreHelper"
 
-export default function EditActivity(route) {
-  const{ activityId } = route.params.activityId;
+export default function EditActivity() {
+  const route = useRoute();
+  const activityId = route.params?.activityId; 
   const [activity,setActivity] = useState("");
   const [duration,setDuration] = useState("");
   const [date,setDate] = useState("");  
@@ -21,13 +29,62 @@ export default function EditActivity(route) {
     { label: 'Hiking', value: 'Hiking' },
   ];
 
+  function handleCancel() {
+    console.log('Cancel Pressed');
+    setActivity("");
+    setDate("");
+    setDuration("");
+    navigation.goBack();
+  }
+
+  async function handleSave(duration) {
+    console.log('Save Pressed', { activity, duration, date });
+//    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
+  
+      Alert.alert(
+        "Important",
+        "Are you sure you want to save these changes?",
+        [
+          {
+          text: "Yes",
+          onPress:async() => {
+            try{
+              const updatedActivityData = {
+                activity,
+                duration: Number(duration),
+                date,              
+            };
+              updatedActivities(activityId);
+              setActivity("");
+              setDuration("");
+              setDate("");
+              navigation.goBack();
+          }catch(error){
+            console.error(error);
+          }
+        }
+      },
+      {
+        text: 'No',
+        onPress: () => console.log('Save cancelled'), 
+        style: 'cancel',
+      },
+      ]
+    );
+  }    
+   
+
+
   useEffect(() => {
+    console.log(route.params);
+   
     const fetchActivity = async () => {
       try {
         const data = await fetchActivitybyID(activityId);
+        console.log(data);
         if (data) {
           setActivity(data.activity);
-          setDuration(data.duration.toString()); // Ensure duration is a string for the Input component
+          setDuration(data.duration.toString());
           setDate(data.date);
         }
       } catch (error) {
@@ -41,7 +98,7 @@ export default function EditActivity(route) {
   return (
     <View style={styles.container}>
       <View style={styles.HeaderContainer}>
-        <Header title={"Add An Activity"} navigation={navigation} showBackButton={true} />
+        <Header title={"Edit"} navigation={navigation} showBackButton={true} />
       </View>
         <View style ={styles.inputContainer}>
         <Input 
@@ -68,7 +125,7 @@ export default function EditActivity(route) {
       </View>
       <View style = {styles.buttonContainer}>
         <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton}/>
-        <CustomButton title='Save' onPress={() => handleSave(duration)} disabled={false}/>
+        <CustomButton title='Save' onPress={() => handleSave()} disabled={false}/>
       </View>
     </View>
   );

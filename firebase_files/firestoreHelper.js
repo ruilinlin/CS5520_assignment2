@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, getDoc, updateDoc} from "firebase/firestore";
 import { database } from "./firebaseSetup";
 
 export async function addActivity(data) {
@@ -26,15 +26,21 @@ export async function fetchActivitybyID(id) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const activity = { id: docSnap.id, ...docSnap.data() };
-      return activity;
-      console.log(activity);
+      console.log("Document data:", docSnap.data());
+      return { id: docSnap.id, ...docSnap.data() };
     } else {
       console.log("No such document!");
     }
   } catch (error) {
     console.error("Error fetching activity data: ", error);
-  } finally {
-    setLoading(false);
+  }
+}
+
+export async function updatedActivities(id){
+  try {
+    const docRef = doc(database, "activities", id);
+    await updateDoc(docRef, updatedActivityData);
+  } catch (err) {
+    console.log(err);
   }
 }

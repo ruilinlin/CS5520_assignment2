@@ -6,9 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const ActivitiesItem= ({ activity }) => {
-
+  
+  console.log("Navigating to EditActivity with id:", activity.id);
   const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60;
   const navigation = useNavigation();
+
   const handlePress=() => {
     navigation.navigate('EditActivity', { activityId: activity.id });
   }

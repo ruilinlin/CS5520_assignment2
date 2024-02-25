@@ -8,7 +8,7 @@ import colors from '../components/Color';
 
 const Input = ({ title, inputHandler, value, items = null,isDateInput = false }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [date, setDate] = useState(value ? new Date(value) : new Date());
+  const [date, setDate] = useState(value ? new Date(value) : null);
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(value);
   const selectListItems = items?.map(item => ({ key: item.value, value: item.label }));
@@ -33,14 +33,14 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
         <>
           <TouchableOpacity onPress={showDatepicker} style={styles.input}>
             <Text style={styles.dateText}>
-              {date.toDateString()}
+              {date?date.toDateString() : "Select a date"}
             </Text>
           </TouchableOpacity>
 
           {showDatePicker && (
             <DateTimePicker
               testID="dateTimePicker"
-              value={date}
+              value={date || new Date}
               mode="date"
               display="default"
               onChange={handleDateChange}
@@ -51,11 +51,12 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
         </>
       ) : items ? (
         <SelectList 
-          setSelected={setSelectedItem} 
+          setSelected={(val) => setSelectedItem(val)} 
           data={items} 
           onSelect={() => inputHandler(selectedItem)}
           boxStyles={styles.input} 
  //         inputStyles={styles.input} 
+          placeholder={value}  
           dropdownStyles={styles.dropdown} 
           dropdownItemStyles={styles.dropdownItem} 
           dropdownTextStyles={styles.dropdownText} 
