@@ -9,7 +9,7 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import CustomButton from '../components/Button';
 import {updatedActivities} from "../firebase_files/firestoreHelper"
-import CheckBox from '../components/CheckBox';
+import CustomCheckBox from '../components/CustomCheckBox';
 
 export default function EditActivity() {
   const route = useRoute();
@@ -102,8 +102,6 @@ export default function EditActivity() {
       ]
     );
   }    
-   
-
 
 
   return (
@@ -132,9 +130,13 @@ export default function EditActivity() {
           title="Date *"
           isDateInput={true} 
         />
-        {setIsSpecial && (<CheckBox 
+
+        {isSpecial && (
+        <CustomCheckBox 
         text="This item is marked as special.Select the checkbox if you would like to approve it"
-        setChecked = {() =>}/>)}
+        handleremove = {() => removeSpecial()}
+        />
+        )}
 
       </View>
       <View style = {styles.buttonContainer}>
