@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import ActivitiesItem from '../components/ActivitiesItem.js';
 import colors from '../components/Color';
 import Header from '../components/Header';
-import ActivityList from '../components/ActivityList';
+import useActivityList from '../components/useActivityList.js';
 
 export default function SpecialActivites({navigation}) {
 //  const [activities, setActivities] = useState([]);
-  const  activities  = ActivityList();
+  const  activities  = useActivityList();
 
   const specialActivities = activities.filter(activity => 
     (activity.activity === "Running" || activity.activity === "Weights") &&  

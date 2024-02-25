@@ -4,11 +4,12 @@ import ActivitiesItem from '../components/ActivitiesItem.js';
 import { useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import colors from '../components/Color';
-import ActivityList from '../components/ActivityList';
+import useActivityList from '../components/useActivityList';
 import { querySnapshot, collection, onSnapshot } from 'firebase/firestore';
 
 export default function AllActivities({navigation}) {
-  const activities = ActivityList();
+  const activities = useActivityList();
+
 //  const { activities, setActivities } = useActivities();
 
 

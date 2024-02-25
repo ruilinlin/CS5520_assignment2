@@ -36,7 +36,7 @@ export async function fetchActivitybyID(id) {
   }
 }
 
-export async function updatedActivities(id){
+export async function updatedActivities(id,updatedActivityData){
   try {
     const docRef = doc(database, "activities", id);
     await updateDoc(docRef, updatedActivityData);

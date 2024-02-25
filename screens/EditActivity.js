@@ -8,16 +8,16 @@ import { useRoute } from '@react-navigation/native';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import CustomButton from '../components/Button';
-import updatedActivities from "../firebase_files/firestoreHelper"
+import {updatedActivities} from "../firebase_files/firestoreHelper"
+import CheckBox from '../components/CheckBox';
 
 export default function EditActivity() {
   const route = useRoute();
   const activityId = route.params?.activityId; 
   const [activity,setActivity] = useState("");
   const [duration,setDuration] = useState("");
-  const [date,setDate] = useState("");  
-
-  const navigation = useNavigation();
+  const [date,setDate] = useState(""); 
+  const [isSpecial,setIsSpecial] = useState(false); 
 
   const activityItems = [
     { label: 'Walking', value: 'Walking' },
@@ -29,15 +29,45 @@ export default function EditActivity() {
     { label: 'Hiking', value: 'Hiking' },
   ];
 
+  function checkisSpecial(activity){
+    const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60;
+    setIsSpecial(isSpecial);
+  }
+
+  const navigation = useNavigation();
+  useEffect(() => {
+    console.log(route.params);
+   
+    const fetchActivity = async () => {
+      try {
+        const data = await fetchActivitybyID(activityId);
+        console.log(data);
+        if (data) {
+          setActivity(data.activity);
+          setDuration(data.duration.toString());
+          setDate(data.date);
+          checkisSpecial(data);
+        }
+      } catch (error) {
+        Alert.alert('Error fetching activity', error.message);
+      }
+    };
+
+    fetchActivity();
+  }, [activityId]);
+
+  function removeSpecial(){
+    
+  }
+
   function handleCancel() {
     console.log('Cancel Pressed');
     setActivity("");
     setDate("");
     setDuration("");
-    navigation.goBack();
   }
 
-  async function handleSave(duration) {
+  async function handleSave() {
     console.log('Save Pressed', { activity, duration, date });
 //    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
   
@@ -54,11 +84,11 @@ export default function EditActivity() {
                 duration: Number(duration),
                 date,              
             };
-              updatedActivities(activityId);
+              updatedActivities(activityId,updatedActivityData);
               setActivity("");
               setDuration("");
               setDate("");
-              navigation.goBack();
+              navigation.goBack()
           }catch(error){
             console.error(error);
           }
@@ -75,25 +105,6 @@ export default function EditActivity() {
    
 
 
-  useEffect(() => {
-    console.log(route.params);
-   
-    const fetchActivity = async () => {
-      try {
-        const data = await fetchActivitybyID(activityId);
-        console.log(data);
-        if (data) {
-          setActivity(data.activity);
-          setDuration(data.duration.toString());
-          setDate(data.date);
-        }
-      } catch (error) {
-        Alert.alert('Error fetching activity', error.message);
-      }
-    };
-
-    fetchActivity();
-  }, [activityId]);
 
   return (
     <View style={styles.container}>
@@ -121,6 +132,9 @@ export default function EditActivity() {
           title="Date *"
           isDateInput={true} 
         />
+        {setIsSpecial && (<CheckBox 
+        text="This item is marked as special.Select the checkbox if you would like to approve it"
+        setChecked = {() =>}/>)}
 
       </View>
       <View style = {styles.buttonContainer}>
