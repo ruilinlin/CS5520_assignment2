@@ -106,16 +106,17 @@ export default function EditActivity() {
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.HeaderContainer}>
         <Header title={"Edit"} navigation={navigation} showBackButton={true} />
       </View>
+
         <View style ={styles.inputContainer}>
         <Input 
           value={activity}
           inputHandler={setActivity}
           title="Activity *"
           items={activityItems}
-
         />
 
         <Input 
@@ -130,19 +131,23 @@ export default function EditActivity() {
           title="Date *"
           isDateInput={true} 
         />
-
-        {isSpecial && (
-        <CustomCheckBox 
-        text="This item is marked as special.Select the checkbox if you would like to approve it"
-        handleremove = {() => removeSpecial()}
-        />
-        )}
-
       </View>
-      <View style = {styles.buttonContainer}>
-        <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton}/>
-        <CustomButton title='Save' onPress={() => handleSave()} disabled={false}/>
+      
+      <View style = {styles.buttomContainer}>
+          {isSpecial && (
+            <CustomCheckBox 
+            style={styles.checkBoxContainer}
+            text="This item is marked as special.Select the checkbox if you would like to approve it"
+            handleremove = {() => removeSpecial()}
+            />
+            )}
+
+          <View style = {styles.buttonContainer}>
+            <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton}/>
+            <CustomButton title='Save' onPress={() => handleSave()} disabled={false}/>
+          </View>
       </View>
+
     </View>
   );
   }  
@@ -158,13 +163,20 @@ const styles = StyleSheet.create({
   HeaderContainer:{
     flex: 1,
   },
+
+  buttomContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly', 
+  },
+  
   buttonContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly', 
   },
   inputContainer:{
-    flex: 4,
+    flex: 3,
    margintop:70,
     width: "90%",
   },
@@ -182,5 +194,8 @@ const styles = StyleSheet.create({
   }, 
   redButton:{
     color:colors.specialColorButton
+  },
+  checkBoxContainer:{
+    width: "85%",
   },
 })

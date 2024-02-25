@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import colors from './Color';
 
-export default function CustomCheckBox({handleremove,text}) {
+export default function CustomCheckBox({handleremove,text,style}) {
   const [isChecked, setChecked] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,style]}>
       <Text style={styles.text}>{text}</Text>
       <CheckBox 
       style = {styles.checkbox}
@@ -24,17 +24,16 @@ export default function CustomCheckBox({handleremove,text}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width:"93%",
     marginHorizontal: 16,
     marginVertical: 32,
+    marginLeft:15,
     flexDirection: 'row',
   },
   text:{
     color:colors.text,
-    marginRight:20,
+    marginRight:5,
   },
   checkbox: {
-    marginLeft:30,
-    margin: 8,
+    marginLeft:5,
   },  
 })
