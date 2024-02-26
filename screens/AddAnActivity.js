@@ -100,8 +100,8 @@ export default function AddAnActivity() {
 
       </View>
       <View style = {styles.buttonContainer}>
-        <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton}/>
-        <CustomButton title='Save' onPress={() => handleSave(duration)} disabled={false}  style={styles.purpleButton}/>
+        <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton} textStyle={styles.text}/>
+        <CustomButton title='Save' onPress={() => handleSave(duration)} disabled={false}  style={styles.purpleButton} textStyle={styles.text}/>
       </View>
     </View>
   );
@@ -147,5 +147,8 @@ const styles = StyleSheet.create({
   purpleButton:{
     backgroundColor:colors.purpleButton,
     marginLeft:20,
+  },
+  text:{
+    color:"white",
   },
 })

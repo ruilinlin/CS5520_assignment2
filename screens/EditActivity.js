@@ -32,6 +32,7 @@ export default function EditActivity() {
     { label: 'Cycling', value: 'Cycling' },
     { label: 'Hiking', value: 'Hiking' },
   ];
+  
 
   function checkisSpecial(activity){
     const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60;
@@ -184,14 +185,13 @@ async function handleSave() {
       }}
     />
   )}
-
-          <View style = {styles.buttonContainer}>
-            <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton}/>
-            <CustomButton title='Save' onPress={() => handleSave()} disabled={false}  style={styles.purpleButton}/>
-          </View>
+      <View style = {styles.buttonContainer}>
+        <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton} textStyle={styles.text}/>
+        <CustomButton title='Save' onPress={() => handleSave()} disabled={false}  style={styles.purpleButton} textStyle={styles.text}/>
       </View>
-
     </View>
+
+  </View>
   );
   }  
 
@@ -237,6 +237,7 @@ const styles = StyleSheet.create({
   redButton:{
     backgroundColor:colors.redButton,
     marginRight:20,
+    text: colors.bottomtext, 
   },
   purpleButton:{
     backgroundColor:colors.purpleButton,
@@ -244,5 +245,8 @@ const styles = StyleSheet.create({
   },
   checkBoxContainer:{
     width: "85%",
+  },
+  text:{
+    color:"white",
   },
 })

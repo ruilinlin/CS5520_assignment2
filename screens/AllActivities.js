@@ -10,25 +10,6 @@ import { querySnapshot, collection, onSnapshot } from 'firebase/firestore';
 export default function AllActivities({navigation}) {
   const activities = useActivityList();
 
-//  const { activities, setActivities } = useActivities();
-
-
-    // if (route.params?.newActivity) {
-    //   setActivities((currentActivities) => {
-
-    //     const doesExist = currentActivities.some(activity =>
-    //       activity.date === route.params.newActivity.date &&
-    //       activity.duration === route.params.newActivity.duration &&
-    //       activity.activity === route.params.newActivity.activity
-    //     );
-  
-    //     if (!doesExist) {
-    //       return [...currentActivities, route.params.newActivity];
-    //     }
-    //     return currentActivities;
-    //   });
-    // }
-
 
   return (
     <View style={styles.container}>

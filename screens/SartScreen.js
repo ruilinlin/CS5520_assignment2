@@ -67,8 +67,8 @@ export default function SartScreen({navigation}) {
           {NumberError ? <Text style={styles.errorText}>{NumberError}</Text> : null}
       </View>
       <View style = {styles.buttonContainer}>
-        <CustomButton title='Reset' onPress={resetHandler} disabled={false}/>
-        <CustomButton title='Start' onPress={Starthandler} disabled={!email && !phoneNumber} style={{textDisabled: styles.errorText}}/>
+        <CustomButton title='Reset' onPress={resetHandler} textStyle={styles.text}/>
+        <CustomButton title='Start' onPress={Starthandler} disabled={!email && !phoneNumber} style={{textDisabled: styles.errorText}} textStyle={styles.errorText}/>
       </View>
     </View>
   )
@@ -88,8 +88,12 @@ const styles = StyleSheet.create({
     margin:3,
     width: "99%",
   },
+  text:{
+    color:colors.redtext,
+    fontSize:16,
+  },
   errorText: {
-    color: colors.inputbox,
-    fontSize: 10,
+    color: colors.bottomtext,
+    fontSize:16,
   }
 });
