@@ -2,12 +2,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from 'react-native';
-import {ActivitiesProvider} from './components/ActivitiesContext';
+//import {ActivitiesProvider} from './components/ActivitiesContext';
 
 
 import SartScreen from "./screens/SartScreen";
 import AllActivities from "./screens/AllActivities";
-import AddAnActivity from "./screens/AddAnActivity";
+import AddOrEditActivity from "./screens/AddOrEditActivity";
 import SpecialActivites from "./screens/SpecialActivites";
 import EditActivity from "./screens/EditActivity";
 
@@ -51,7 +51,7 @@ function MyTabs() {
 
 export default function App() {
   return (
-    <ActivitiesProvider>
+
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -65,8 +65,8 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="AddAnActivity"
-          component={AddAnActivity}
+          name="AddOrEditActivity"
+          component={AddOrEditActivity}
           options={{ headerShown: false }} 
         />
         <Stack.Screen
@@ -77,7 +77,7 @@ export default function App() {
 
       </Stack.Navigator>
     </NavigationContainer>
-    </ActivitiesProvider>
+
   );
 }
 const styles = StyleSheet.create({});

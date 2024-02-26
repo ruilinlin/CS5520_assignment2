@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
     alignItems:"center",
   },
   text: {
-    fontSize: 14,
+    fontSize: 16,
   },
   textDisabled: {
-    fontSize: 14,
+    fontSize: 16,
     color: colors.unabletext, 
   },
 });
