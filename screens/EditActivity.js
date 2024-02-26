@@ -187,7 +187,7 @@ async function handleSave() {
 
           <View style = {styles.buttonContainer}>
             <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton}/>
-            <CustomButton title='Save' onPress={() => handleSave()} disabled={false}/>
+            <CustomButton title='Save' onPress={() => handleSave()} disabled={false}  style={styles.purpleButton}/>
           </View>
       </View>
 
@@ -214,13 +214,12 @@ const styles = StyleSheet.create({
   },
   
   buttonContainer: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'row',
     justifyContent: 'space-evenly', 
   },
   inputContainer:{
     flex: 3,
-   margintop:70,
     width: "90%",
   },
   errorText: {
@@ -236,7 +235,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.dropdownbackgroundColor,
   }, 
   redButton:{
-    color:colors.specialColorButton
+    backgroundColor:colors.redButton,
+    marginRight:20,
+  },
+  purpleButton:{
+    backgroundColor:colors.purpleButton,
+    marginLeft:20,
   },
   checkBoxContainer:{
     width: "85%",

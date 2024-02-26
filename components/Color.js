@@ -14,7 +14,8 @@ const colors = {
   yellowButton:"gold",
   bottomtext:'white',
   bottomtextinuse:'gold',
-  specialColorButton:'red',
+  redButton:'#c71585',
+  purpleButton:"#663399"
 }
 
 

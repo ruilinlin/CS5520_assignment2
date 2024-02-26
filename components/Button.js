@@ -23,10 +23,14 @@ const CustomButton = ({ title,onPress, disabled, style}) => {
 const styles = StyleSheet.create({
   buttonContainer: {
     padding: 10,
+    width:120,
+    height:40,
+    borderRadius:5,
+    alignItems:"center",
   },
   text: {
     fontSize: 16,
-    color: colors.text, 
+    color: colors.bottomtext, 
   },
   textDisabled: {
     fontSize: 16,
