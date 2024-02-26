@@ -3,8 +3,9 @@ import React from 'react'
 import colors from './Color';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
-export default function Header({ title, navigation, showAddButton, showBackButton }) {
+export default function Header({ title, navigation, showAddButton, showBackButton ,showtrashButton,handleDelete}) {
   return (
     <SafeAreaView style={styles.headerContainer}>
       {/* Render Back Button or Placeholder on the left */}
@@ -25,6 +26,16 @@ export default function Header({ title, navigation, showAddButton, showBackButto
           onPress={() => navigation.navigate('AddAnActivity')}
           style={styles.iconContainer}>
           <Ionicons name="add" size={24} color="white" />
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.placeholder} /> 
+      )}
+
+      {showtrashButton ? (
+        <TouchableOpacity 
+          onPress={() => handleDelete()}
+          style={styles.iconContainer}>
+          <FontAwesome name="trash" size={22} color="white" />
         </TouchableOpacity>
       ) : (
         <View style={styles.placeholder} /> 
@@ -59,7 +70,10 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: colors.yellowButton,
     fontSize: 16,
-
+  },
+  iconContainer:{
+    marginRight:15,
+    marginLeft:5,
   },
   placeholder: {
     width: 24, 

@@ -80,8 +80,7 @@ export default function EditActivity() {
     setDuration("");
   }
 
-  async function handleSave() {
-
+async function handleSave() {
 //    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
     const isNowSpecial = (activity === "Running" || activity === "Weights") && Number(duration) > 60 && !isChecked;  
       Alert.alert(
@@ -118,12 +117,37 @@ export default function EditActivity() {
     );
   }    
 
+  async function handleDelete() {
+    Alert.alert(
+      "Delete",
+      "Are you sure you want to delete this item?",
+      [
+        {
+          text: "Yes",
+          onPress: async () => { 
+            try {
+              deleteActivity(activityId); 
+              navigation.navigate("AllActivities"); 
+            } catch (error) {
+              console.error(error); 
+            }
+          }
+        },
+        {
+          text: 'No',
+          onPress: () => console.log('Deletion cancelled'),
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false } // This makes the alert non-cancelable outside of its buttons (optional)
+    );
+  }
 
   return (
     <View style={styles.container}>
       
       <View style={styles.HeaderContainer}>
-        <Header title={"Edit"} navigation={navigation} showBackButton={true} />
+        <Header title={"Edit"} navigation={navigation} showBackButton={true}  showtrashButton={true} handleDelete={handleDelete}/>
       </View>
 
         <View style ={styles.inputContainer}>
