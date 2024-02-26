@@ -7,7 +7,7 @@ import colors from '../components/Color';
 
 const Input = ({ title, inputHandler, value, items = null,isDateInput = false }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [date, setDate] = useState(value ? new Date(value) : null);
+  const [date, setDate] = useState(value);
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(value);
   const selectListItems = items?.map(item => ({ key: item.value, value: item.label }));
@@ -20,7 +20,7 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShowDatePicker(Platform.OS === 'ios' ? true : false); // On Android, the picker will close automatically
+    setShowDatePicker(false); 
     setDate(currentDate);
     inputHandler(currentDate.toDateString());
   };
@@ -32,7 +32,7 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
         <>
           <TouchableOpacity onPress={showDatepicker} style={styles.input}>
             <Text style={styles.dateText}>
-              {date?date.toDateString() : "Select a date"}
+              {value}
             </Text>
           </TouchableOpacity>
 
@@ -41,7 +41,6 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
               testID="dateTimePicker"
               value={date || new Date}
               mode="date"
-              display="default"
               onChange={handleDateChange}
               display="inline"
               style={

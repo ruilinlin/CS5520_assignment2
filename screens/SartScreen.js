@@ -90,10 +90,10 @@ const styles = StyleSheet.create({
   },
   text:{
     color:colors.redtext,
-    fontSize:16,
+    fontSize:13,
   },
   errorText: {
     color: colors.bottomtext,
-    fontSize:16,
+    fontSize:13,
   }
 });
