@@ -35,7 +35,7 @@ export default function EditActivity() {
   
 
   function checkisSpecial(activity){
-    const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60;
+    const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60 && activity.important;
     setIsSpecial(isSpecial);
   }
 
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   },
   
   buttonContainer: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly', 
   },

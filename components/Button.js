@@ -23,17 +23,17 @@ const CustomButton = ({ title,onPress, disabled, style,textStyle }) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: 10,
+    padding: 8,
     width:120,
-    height:40,
+    height:30,
     borderRadius:5,
     alignItems:"center",
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
   },
   textDisabled: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.unabletext, 
   },
 });

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-//import DropDownPicker from 'react-native-dropdown-picker';
 import { SelectList } from 'react-native-dropdown-select-list';
 
 import colors from '../components/Color';
@@ -45,7 +44,10 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
               display="default"
               onChange={handleDateChange}
               display="inline"
-              style={{ backgroundColor: colors.background }}
+              style={
+                { backgroundColor: colors.background} 
+                }
+                
             />
           )}
         </>
