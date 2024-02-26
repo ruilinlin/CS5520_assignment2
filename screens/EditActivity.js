@@ -21,7 +21,7 @@ export default function EditActivity() {
   const [important,setImportant] =useState("");
   const [isSpecial,setIsSpecial] = useState(false); 
 
-  const [isChecked, setIsChecked] = useState(important);
+  const [isChecked, setIsChecked] = useState('');
 
   const activityItems = [
     { label: 'Walking', value: 'Walking' },
@@ -83,7 +83,7 @@ export default function EditActivity() {
   async function handleSave() {
 
 //    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
-    const isNowSpecial = (activity === "Running" || activity === "Weights") && Number(duration) > 60;  
+    const isNowSpecial = (activity === "Running" || activity === "Weights") && Number(duration) > 60 && !isChecked;  
       Alert.alert(
         "Important",
         "Are you sure you want to save these changes?",

@@ -11,7 +11,7 @@ export default function SpecialActivites({navigation}) {
 
   const specialActivities = activities.filter(activity => 
     (activity.activity === "Running" || activity.activity === "Weights") &&  
-    Number(activity.duration) > 60
+    Number(activity.duration) > 60 && activity.important
   );
     
   

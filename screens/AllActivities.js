@@ -37,7 +37,7 @@ export default function AllActivities({navigation}) {
         data={activities}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <ActivitiesItem activity={item} checkBoxClicked={}/>
+          <ActivitiesItem activity={item} />
         )}
       />
     </View>
