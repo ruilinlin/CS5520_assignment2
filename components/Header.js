@@ -23,7 +23,7 @@ export default function Header({ title, navigation, showAddButton, showBackButto
       {/* Render Add Button or Placeholder on the right */}
       {showAddButton ? (
         <TouchableOpacity 
-          onPress={() => navigation.navigate('AddAnActivity')}
+          onPress={() => navigation.navigate('AddOrEditActivity')}
           style={styles.iconContainer}>
           <Ionicons name="add" size={24} color="white" />
         </TouchableOpacity>

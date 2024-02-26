@@ -20,9 +20,10 @@ export default function CustomCheckBox({text,style,isChecked,onValueChange}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+//    flex: 1,
     marginHorizontal: 16,
-    marginVertical: 50,
+    marginTop:20,
+//    marginVertical: 50,
     marginLeft:15,
     flexDirection: 'row',
   },

@@ -15,7 +15,7 @@ const ActivitiesItem= ({ activity}) => {
   const navigation = useNavigation();
 
   const handlePress=() => {
-    navigation.navigate('EditActivity', { activityId: activity.id });
+    navigation.navigate('AddOrEditActivity', { activityId: activity.id });
   }
   
   

@@ -9,7 +9,7 @@ import SartScreen from "./screens/SartScreen";
 import AllActivities from "./screens/AllActivities";
 import AddOrEditActivity from "./screens/AddOrEditActivity";
 import SpecialActivites from "./screens/SpecialActivites";
-import EditActivity from "./screens/EditActivity";
+
 
 import colors from './components/Color';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
@@ -67,11 +67,6 @@ export default function App() {
         <Stack.Screen
           name="AddOrEditActivity"
           component={AddOrEditActivity}
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen
-          name="EditActivity"
-          component={EditActivity}
           options={{ headerShown: false }} 
         />
 

@@ -11,7 +11,7 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(value);
   const selectListItems = items?.map(item => ({ key: item.value, value: item.label }));
-
+//  console.log(date);
 //  const dynamicDropdownStyle = open ? { zIndex: 3000 } : { zIndex: 1 };
 
   const showDatepicker = () => {
@@ -20,6 +20,7 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
+//    console.log(currentDate);
     setShowDatePicker(false); 
     setDate(currentDate);
     inputHandler(currentDate.toDateString());
@@ -64,9 +65,9 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
         />
       ): (
         <TextInput
-          style={styles.input}
-          onChangeText={(text) => inputHandler(text)}
-          value={value}
+        style={styles.input}
+        onChangeText={(text) => inputHandler(text)}
+        value={value}
         />
       )}
     </View>
