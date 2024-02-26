@@ -10,6 +10,7 @@ import Input from '../components/Input';
 import CustomButton from '../components/Button';
 import {updatedActivities} from "../firebase_files/firestoreHelper"
 import CustomCheckBox from '../components/CustomCheckBox';
+import { deleteActivity } from '../firebase_files/firestoreHelper';
 
 export default function EditActivity() {
   const route = useRoute();
@@ -17,7 +18,10 @@ export default function EditActivity() {
   const [activity,setActivity] = useState("");
   const [duration,setDuration] = useState("");
   const [date,setDate] = useState(""); 
+  const [important,setImportant] =useState("");
   const [isSpecial,setIsSpecial] = useState(false); 
+
+  const [isChecked, setIsChecked] = useState(important);
 
   const activityItems = [
     { label: 'Walking', value: 'Walking' },
@@ -46,6 +50,7 @@ export default function EditActivity() {
           setActivity(data.activity);
           setDuration(data.duration.toString());
           setDate(data.date);
+          setImportant(data.important);
           checkisSpecial(data);
         }
       } catch (error) {
@@ -56,8 +61,16 @@ export default function EditActivity() {
     fetchActivity();
   }, [activityId]);
 
-  function removeSpecial(){
-    
+  function removeSpecial(newValue){
+    const updateImportant = !newValue;
+    const updatedActivityData = {
+      activity,
+      duration: Number(duration),
+      date,
+      important : updateImportant,              
+  };
+    updatedActivities(activityId,updatedActivityData);
+    setImportant(updateImportant);
   }
 
   function handleCancel() {
@@ -68,9 +81,9 @@ export default function EditActivity() {
   }
 
   async function handleSave() {
-    console.log('Save Pressed', { activity, duration, date });
+
 //    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
-  
+    const isNowSpecial = (activity === "Running" || activity === "Weights") && Number(duration) > 60;  
       Alert.alert(
         "Important",
         "Are you sure you want to save these changes?",
@@ -82,13 +95,15 @@ export default function EditActivity() {
               const updatedActivityData = {
                 activity,
                 duration: Number(duration),
-                date,              
+                date,
+                important: isNowSpecial,              
             };
               updatedActivities(activityId,updatedActivityData);
+              console.log('Save Pressed', { activity, duration, date,important });
               setActivity("");
               setDuration("");
               setDate("");
-              navigation.goBack()
+              navigation.navigate("AllActivities",{isChecked:isChecked } )
           }catch(error){
             console.error(error);
           }
@@ -134,13 +149,17 @@ export default function EditActivity() {
       </View>
       
       <View style = {styles.buttomContainer}>
-          {isSpecial && (
-            <CustomCheckBox 
-            style={styles.checkBoxContainer}
-            text="This item is marked as special.Select the checkbox if you would like to approve it"
-            handleremove = {() => removeSpecial()}
-            />
-            )}
+      {isSpecial && (
+    <CustomCheckBox 
+      style={styles.checkBoxContainer}
+      text="This item is marked as special. Select the checkbox if you would like to approve it."
+      isChecked={isChecked}
+      onValueChange={(newValue) => {
+        setIsChecked(newValue);
+        removeSpecial(newValue);
+      }}
+    />
+  )}
 
           <View style = {styles.buttonContainer}>
             <CustomButton title='Cancel' onPress={handleCancel} disabled={false} style={styles.redButton}/>

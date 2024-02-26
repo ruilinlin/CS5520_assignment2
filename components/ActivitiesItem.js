@@ -5,10 +5,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 
-const ActivitiesItem= ({ activity }) => {
+const ActivitiesItem= ({ activity}) => {
+  console.log(activity.activity, activity.duration, activity.important);
+
   
-  console.log("Navigating to EditActivity with id:", activity.id);
-  const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60;
+//  console.log("Navigating to EditActivity with id:", activity.id);
+  const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60 && activity.important;
+                 
   const navigation = useNavigation();
 
   const handlePress=() => {

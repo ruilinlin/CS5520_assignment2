@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import colors from './Color';
 
-export default function CustomCheckBox({handleremove,text,style}) {
-  const [isChecked, setChecked] = useState(false);
+export default function CustomCheckBox({text,style,isChecked,onValueChange}) {
+
 
   return (
     <View style={[styles.container,style]}>
@@ -12,10 +12,7 @@ export default function CustomCheckBox({handleremove,text,style}) {
       <CheckBox 
       style = {styles.checkbox}
       value={isChecked} // Use value to control checked state
-      onValueChange={(newValue) => {
-        setChecked(newValue); // Update internal checked state
-        handleremove(); 
-      }}
+      onValueChange={onValueChange}
       />
     </View>
   );

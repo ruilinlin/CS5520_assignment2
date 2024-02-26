@@ -46,12 +46,14 @@ export default function AddAnActivity() {
       return;
     }
 
+    const isSpecial = (activity === "Running" || activity === "Weights") && durationNumber > 60;
 //    navigation.navigate('AllActivities', { newActivity: { activity, duration, date } });
   
     const newActivityData = {
       activity,
       duration: durationNumber,
       date,
+      important: isSpecial,
     };
     try {
       const docId = addActivity(newActivityData);
