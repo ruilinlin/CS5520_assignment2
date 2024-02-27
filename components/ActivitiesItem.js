@@ -4,16 +4,31 @@ import colors from "./Color";
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+/**
+ * ActivitiesItem Component
+ * 
+ * Displays a single activity item in a list. Shows the activity's name, date, duration,
+ * and an optional warning icon if the activity is marked as 'special'.
+ * A 'special' activity is defined as one with the type "Running" or "Weights" that has a duration
+ * of more than 60 minutes and is marked as important.
+ * 
+ * @param {Object} props Component props
+ * @param {Object} props.activity The activity object to display, containing:
+ *  - {string} id: Unique identifier for the activity
+ *  - {string} activity: Name of the activity
+ *  - {number|string} duration: Duration of the activity in minutes
+ *  - {string} date: Display date of the activity
+ *  - {boolean} important: Flag indicating if the activity is marked as important
+ * 
+ * @returns {React.Component} A React component representing a single activity item
+ */
 
 const ActivitiesItem= ({ activity}) => {
-  console.log(activity.activity, activity.duration, activity.important);
-
-  
-//  console.log("Navigating to EditActivity with id:", activity.id);
+// Determines if the activity should be highlighted as special based on criteria
   const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60 && activity.important;
                  
   const navigation = useNavigation();
-
+ // Handles navigation to the activity edit screen with the activity's ID as a parameter
   const handlePress=() => {
     navigation.navigate('AddOrEditActivity', { activityId: activity.id });
   }

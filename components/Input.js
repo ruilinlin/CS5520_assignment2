@@ -5,26 +5,49 @@ import { SelectList } from 'react-native-dropdown-select-list';
 
 import colors from '../components/Color';
 
+
+/**
+ * A versatile input component for React Native applications that can handle text, dropdown, and date inputs.
+ *
+ * @param {Object} props - Props for configuring the Input component.
+ * @param {string} props.title - The label text to display above the input.
+ * @param {Function} props.inputHandler - The function to call when the input value changes. It receives the new value as an argument.
+ * @param {string|Date} props.value - The current value of the input. For date inputs, it should be a Date object.
+ * @param {Array<{label: string, value: any}>} [props.items=null] - Optional. An array of objects for dropdown options. Each object should have a `label` (display text) and a `value` (the underlying value).
+ * @param {boolean} [props.isDateInput=false] - Optional. If true, the input is treated as a date picker.
+ *
+ * @returns {React.ReactElement} The rendered input component.
+ */
+
 const Input = ({ title, inputHandler, value, items = null,isDateInput = false }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [date, setDate] = useState(value);
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(value);
   const selectListItems = items?.map(item => ({ key: item.value, value: item.label }));
-//  console.log(date);
-//  const dynamicDropdownStyle = open ? { zIndex: 3000 } : { zIndex: 1 };
 
+/**
+ * Triggers the display of the date picker UI.
+ * This function sets the `showDatePicker` state to `true`, making the date picker visible.
+ */
   const showDatepicker = () => {
     setShowDatePicker(true);
   };
 
-  const handleDateChange = (event, selectedDate) => {
+/**
+ * Handles the selection of a new date from the date picker.
+ * It updates the component's state with the selected date and calls the input handler with a formatted date string.
+ *
+ * @param {Date} selectedDate - The newly selected date.
+ */
+
+  const handleDateChange = (selectedDate) => {
     const currentDate = selectedDate || date;
-//    console.log(currentDate);
     setShowDatePicker(false); 
     setDate(currentDate);
     inputHandler(currentDate.toDateString());
   };
+
 
   return (
   <View style={styles.inputContainer}>
@@ -40,7 +63,7 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
           {showDatePicker && (
             <DateTimePicker
               testID="dateTimePicker"
-              value={date || new Date}
+              value={date}
               mode="date"
               onChange={handleDateChange}
               display="inline"
@@ -57,7 +80,6 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
           data={items} 
           onSelect={() => inputHandler(selectedItem)}
           boxStyles={styles.input} 
- //         inputStyles={styles.input} 
           placeholder={value}  
           dropdownStyles={styles.dropdown} 
           dropdownItemStyles={styles.dropdownItem} 

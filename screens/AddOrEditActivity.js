@@ -12,6 +12,16 @@ import CustomCheckBox from '../components/CustomCheckBox';
 import { deleteActivity } from '../firebase_files/firestoreHelper';
 import {addActivity} from '../firebase_files/firestoreHelper';
 
+
+/**
+ * A screen component for adding or editing an activity in a React Native application, 
+ * managing states for activity details and interfacing with Firebase for data persistence.
+ *
+ * This component allows users to input details about an activity, including its type, duration, date, 
+ * and importance. It supports both adding new activities and editing existing ones, with special handling 
+ * for marking activities as important based on specific criteria.
+ *
+ */
 export default function AddOrEditActivity() {
   const route = useRoute();
   const navigation = useNavigation();
@@ -36,6 +46,7 @@ export default function AddOrEditActivity() {
     { label: 'Hiking', value: 'Hiking' },
   ];
 
+// useEffect hook to fetch activity details when in edit mode
   useEffect(() => {
     if (isEditMode && activityId) {
       const fetchActivity = async () => {
@@ -60,7 +71,7 @@ export default function AddOrEditActivity() {
     const isSpecial = (activity.activity === "Running" || activity.activity === "Weights") && Number(activity.duration) > 60 && activity.important;
     setIsSpecial(isSpecial);
   }
-
+// Function to handle change the special as non-special of an activity
   function removeSpecial(newValue){
     const updateImportant = !newValue;
     const updatedActivityData = {
@@ -80,23 +91,22 @@ export default function AddOrEditActivity() {
     setDuration("");
     navigation.goBack();
   }
-
-  async function handleSave(duration) {
-    console.log('Save Pressed', { activity, duration, date });
-    // if (!activity || !duration || !date) {
-    //   Alert.alert('Error', 'Please fill out all fields.');
-    //   return;
-    // }    
-    // const durationNumber = Number(duration);
-    // if (isNaN(durationNumber) || durationNumber <= 0) {
-    //   alert('Please enter a valid duration number.');
-    //   return;
-    // }
-
-//    
+// Function to handle save of an activity
+  async function handleSave() {
+  
+    if (!activity || !duration || !date) {
+      Alert.alert('Error', 'Please fill out all fields.');
+      return;
+    }    
+    const durationNumber = Number(duration);
+    if (isNaN(durationNumber) || durationNumber <= 0) {
+      alert('Please enter a valid duration number.');
+      return;
+    }
 
     try {
       if(isEditMode){
+        // Additional logic for handling special cases when in edit mode
         const isNowSpecial = (activity === "Running" || activity === "Weights") && Number(duration) > 60 && !isChecked;  
         
         Alert.alert(
@@ -153,7 +163,7 @@ export default function AddOrEditActivity() {
       Alert.alert('Error', error.message);
     }
   }    
-
+// Function to handle deletion of an activity
   async function handleDelete() {
     Alert.alert(
       "Delete",
@@ -179,6 +189,7 @@ export default function AddOrEditActivity() {
       { cancelable: false } // This makes the alert non-cancelable outside of its buttons (optional)
     );
   }
+ // console.log({  duration, date });
 
   return (
     <View style={styles.container}>

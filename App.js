@@ -2,8 +2,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from 'react-native';
-//import {ActivitiesProvider} from './components/ActivitiesContext';
-
 
 import SartScreen from "./screens/SartScreen";
 import AllActivities from "./screens/AllActivities";
@@ -13,6 +11,22 @@ import SpecialActivites from "./screens/SpecialActivites";
 
 import colors from './components/Color';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+
+/**
+ * App Component
+ * 
+ * The root component of the application. It sets up the navigation structure using
+ * react-navigation's NavigationContainer and StackNavigator. The navigation structure includes
+ * the StartScreen, Home (which nests the bottom tabs via MyTabs), and the AddOrEditActivity screen.
+ * 
+ * The Stack.Navigator manages navigation between these screens, with the bottom tab navigator (MyTabs)
+ * providing navigation between the AllActivities and SpecialActivities screens as part of the Home screen.
+ * 
+ * Returns:
+ *   A NavigationContainer wrapping the Stack.Navigator, which defines the navigation routes and
+ *   components for the application.
+ */
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,6 +62,7 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+
 
 export default function App() {
   return (

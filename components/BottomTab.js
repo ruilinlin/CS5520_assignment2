@@ -4,6 +4,23 @@ import colors from './Color';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
+/**
+ * A custom bottom navigation tab component for React Native applications, designed to facilitate navigation 
+ * between different sections of the app, specifically "All Activities" and "Special Activities".
+ *
+ * It dynamically highlights the currently active tab and provides a user-friendly interface for switching 
+ * between tabs. This component is highly customizable and integrates smoothly with the React Navigation library.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.navigation - The navigation object provided by React Navigation for navigating between screens.
+ * @param {string} props.activePage - A string indicating the currently active page/tab to visually highlight it.
+ * @param {Array} props.activities - Optional. Data to be passed to the "Special Activities" section, which can be used for display or filtering.
+ *
+ * @returns {React.ReactElement} A React element representing the bottom navigation bar.
+
+ * />
+ */
+
 export default function BottomTab({ navigation, activePage, activities}) {
   const getTextAndIconColor = (page) => activePage === page ? colors.bottomtextinuse : colors.bottomtext;
   console.log(activePage); 
@@ -36,6 +53,7 @@ export default function BottomTab({ navigation, activePage, activities}) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   tabContainer: {
     backgroundColor: colors.header,

@@ -4,15 +4,28 @@ import colors from './Color';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import CustomButton from "../components/Button"
 
 export default function Header({ title, navigation, showAddButton, showBackButton ,showtrashButton,handleDelete}) {
+
+  const IconButton = ({ onPress, iconName, iconSize, iconColor, iconComponent: IconComponent }) => (
+    <CustomButton onPress={onPress} style={styles.iconButton}>
+      <IconComponent name={iconName} size={iconSize} color={iconColor} />
+    </CustomButton>
+  );
+
   return (
     <SafeAreaView style={styles.headerContainer}>
       {/* Render Back Button or Placeholder on the left */}
       {showBackButton ? (
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconContainer}>
-          <MaterialIcons name="keyboard-arrow-left" size={30} color="white" />
-        </TouchableOpacity>
+        <IconButton
+        onPress={() => navigation.goBack()}
+        iconName="keyboard-arrow-left"
+        iconSize={30}
+        iconColor="white"
+        iconComponent={MaterialIcons}
+      />
+
       ) : (
         <View style={styles.placeholder} /> // Empty placeholder to keep the title centered when no back button
       )}
@@ -22,21 +35,25 @@ export default function Header({ title, navigation, showAddButton, showBackButto
 
       {/* Render Add Button or Placeholder on the right */}
       {showAddButton ? (
-        <TouchableOpacity 
-          onPress={() => navigation.navigate('AddOrEditActivity')}
-          style={styles.iconContainer}>
-          <Ionicons name="add" size={24} color="white" />
-        </TouchableOpacity>
+       <IconButton
+       onPress={() => navigation.navigate('AddOrEditActivity')}
+       iconName="add"
+       iconSize={24}
+       iconColor="white"
+       iconComponent={Ionicons}
+     />
       ) : (
         <View style={styles.placeholder} /> 
       )}
 
       {showtrashButton ? (
-        <TouchableOpacity 
-          onPress={() => handleDelete()}
-          style={styles.iconContainer}>
-          <FontAwesome name="trash" size={22} color="white" />
-        </TouchableOpacity>
+        <IconButton
+        onPress={handleDelete}
+        iconName="trash"
+        iconSize={22}
+        iconColor="white"
+        iconComponent={FontAwesome}
+      />
       ) : (
         <View style={styles.placeholder} /> 
       )}
