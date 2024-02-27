@@ -194,7 +194,7 @@ export default function AddOrEditActivity() {
   return (
     <View style={styles.container}>
       <View style={styles.HeaderContainer}>
-      <Header title={isEditMode ? "Edit" : "Add An Activity"} navigation={navigation} showBackButton={true} showtrashButton={true} handleDelete={handleDelete}/>
+      <Header title={isEditMode ? "Edit" : "Add An Activity"} navigation={navigation} showBackButton={true} showtrashButton={isEditMode ? true : false} handleDelete={handleDelete}/>
       </View>
         <View style ={styles.inputContainer}>
         <Input 

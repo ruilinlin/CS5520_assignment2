@@ -41,14 +41,14 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
  * @param {Date} selectedDate - The newly selected date.
  */
 
-  const handleDateChange = (selectedDate) => {
+  const handleDateChange = (event,selectedDate) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false); 
     setDate(currentDate);
     inputHandler(currentDate.toDateString());
   };
 
-
+  
   return (
   <View style={styles.inputContainer}>
       <Text style={styles.titleText}>{title}</Text>
@@ -63,7 +63,7 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
           {showDatePicker && (
             <DateTimePicker
               testID="dateTimePicker"
-              value={date}
+              value={date || new Date}
               mode="date"
               onChange={handleDateChange}
               display="inline"
@@ -80,6 +80,7 @@ const Input = ({ title, inputHandler, value, items = null,isDateInput = false })
           data={items} 
           onSelect={() => inputHandler(selectedItem)}
           boxStyles={styles.input} 
+ //         inputStyles={styles.input} 
           placeholder={value}  
           dropdownStyles={styles.dropdown} 
           dropdownItemStyles={styles.dropdownItem} 

@@ -9,23 +9,18 @@ import CustomButton from "../components/Button"
 export default function Header({ title, navigation, showAddButton, showBackButton ,showtrashButton,handleDelete}) {
 
   const IconButton = ({ onPress, iconName, iconSize, iconColor, iconComponent: IconComponent }) => (
-    <CustomButton onPress={onPress} style={styles.iconButton}>
+    <CustomButton onPress={onPress} style={styles.iconContainer}>
       <IconComponent name={iconName} size={iconSize} color={iconColor} />
     </CustomButton>
   );
-
+  
   return (
     <SafeAreaView style={styles.headerContainer}>
       {/* Render Back Button or Placeholder on the left */}
       {showBackButton ? (
-        <IconButton
-        onPress={() => navigation.goBack()}
-        iconName="keyboard-arrow-left"
-        iconSize={30}
-        iconColor="white"
-        iconComponent={MaterialIcons}
-      />
-
+        <CustomButton onPress={() => navigation.goBack()} style={styles.iconContainer}>
+          <MaterialIcons name="keyboard-arrow-left" size={30} color="white" />
+        </CustomButton>
       ) : (
         <View style={styles.placeholder} /> // Empty placeholder to keep the title centered when no back button
       )}
@@ -35,25 +30,21 @@ export default function Header({ title, navigation, showAddButton, showBackButto
 
       {/* Render Add Button or Placeholder on the right */}
       {showAddButton ? (
-       <IconButton
-       onPress={() => navigation.navigate('AddOrEditActivity')}
-       iconName="add"
-       iconSize={24}
-       iconColor="white"
-       iconComponent={Ionicons}
-     />
+        <CustomButton
+          onPress={() => navigation.navigate('AddOrEditActivity')}
+          style={styles.iconContainer}>
+          <Ionicons name="add" size={24} color="white" />
+        </CustomButton>
       ) : (
         <View style={styles.placeholder} /> 
       )}
 
       {showtrashButton ? (
-        <IconButton
-        onPress={handleDelete}
-        iconName="trash"
-        iconSize={22}
-        iconColor="white"
-        iconComponent={FontAwesome}
-      />
+        <CustomButton
+          onPress={() => handleDelete()}
+          style={styles.iconContainer}>
+          <FontAwesome name="trash" size={22} color="white" />
+        </CustomButton>
       ) : (
         <View style={styles.placeholder} /> 
       )}
@@ -89,8 +80,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   iconContainer:{
-    marginRight:15,
+    marginRight:1,
     marginLeft:5,
+    width:30,
   },
   placeholder: {
     width: 24, 
